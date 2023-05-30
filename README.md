@@ -19,7 +19,7 @@ Resurrection Cup Overlay + Showcase + ~~Mappool~~ (to be added soon)
 - Redo the `Install instructions`
 
 ## Developing
-- Clone the repository by `git clone https://github.com/FukutoTojido/Resurrection-Cup-Showcase.git`
+- Clone the repository by `git clone https://github.com/FukutoTojido/Resurrection-Cup-Overlay-Bundle.git`
 - Install all NPM packages by `npm i`
 - Start the overlay with `npm run dev`
 - To build the overlay, simply run `npm run build`, a `dist` folder will be created with all the assets needed for gosumemory.
