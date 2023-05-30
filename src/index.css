@@ -1,0 +1,61 @@
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-ExtraLight.ttf);
+    font-weight: 200;
+}
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-Light.ttf);
+    font-weight: 300;
+}
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-Regular.ttf);
+    font-weight: 400;
+}
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-Medium.ttf);
+    font-weight: 500;
+}
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-SemiBold.ttf);
+    font-weight: 600;
+}
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-Bold.ttf);
+    font-weight: 700;
+}
+@font-face {
+    font-family: Manrope;
+    src: url(/fonts/Manrope-ExtraBold.ttf);
+    font-weight: 800;
+}
+
+:root {
+    font-family: Manrope, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: dark;
+    /* color: rgba(255, 255, 255, 0.87); */
+    color: white;
+    /* background-color: #242424; */
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}

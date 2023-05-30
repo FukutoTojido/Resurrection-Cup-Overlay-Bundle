@@ -1,0 +1,179 @@
+#App {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 1920px;
+    height: 1080px;
+}
+
+#showcase {
+    #stats {
+        position: absolute;
+        top: 30px;
+
+        padding: 20px 60px 20px 40px;
+        font-size: 24px;
+
+        border-radius: 0 15px 15px 0;
+
+        background-color: #1e1c27;
+        overflow: hidden;
+
+        box-shadow: 0 4px 10px 0 rgb(0 0 0 /0.5);
+    }
+
+    .bg {
+        position: absolute;
+        top: -30px;
+        left: 0;
+
+        width: 1920px;
+        height: 1080px;
+
+        opacity: 20%;
+
+        background-size: cover;
+        background-position: center;
+
+        filter: blur(20px);
+    }
+
+    .rawStats {
+        position: relative;
+        display: flex;
+        gap: 10px;
+    }
+
+    .stat {
+        position: relative;
+        display: flex;
+        gap: 10px;
+    }
+
+    .stat span {
+        position: relative;
+        color: #e7ada2;
+        font-weight: 900;
+    }
+
+    #info {
+        position: absolute;
+        bottom: 60px;
+        right: 60px;
+
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 30px;
+
+        font-weight: 600;
+    }
+
+    .metadata {
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        text-align: right;
+    }
+
+    #artistTitle {
+        display: flex;
+        flex-direction: column;
+
+        line-height: 36px;
+    }
+
+    #title {
+        font-size: 36px;
+        font-weight: 900;
+
+        color: #e7ada2;
+    }
+
+    #artist {
+        font-size: 24px;
+    }
+
+    #mapperDiff {
+        display: flex;
+        flex-direction: column;
+
+        font-size: 16px;
+    }
+
+    #mapperDiff span {
+        font-weight: 900;
+        color: #e7ada2;
+    }
+
+    #mapperDiff > * {
+        display: flex;
+        gap: 20px;
+
+        justify-content: end;
+    }
+
+    #mod {
+        width: 120px;
+        height: 80px;
+
+        padding: 20px 30px;
+        font-size: 32px;
+
+        font-weight: 900;
+
+        border-radius: 15px;
+        border: solid white 4px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #replayer {
+        position: absolute;
+        top: 50px;
+        right: 50px;
+
+        font-size: 24px;
+
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+
+        line-height: 36px;
+    }
+
+    .playerName {
+        font-size: 40px;
+        font-weight: 900;
+        color: #e7ada2;
+    }
+
+    #mod.NM {
+        color: #9bc1e4;
+        border-color: #9bc1e4;
+    }
+    #mod.HD {
+        color: #f2df99;
+        border-color: #f2df99;
+    }
+    #mod.HR {
+        color: #eb9999;
+        border-color: #eb9999;
+    }
+    #mod.DT {
+        color: #cea3ff;
+        border-color: #cea3ff;
+    }
+    #mod.FM {
+        color: #c7e1a6;
+        border-color: #c7e1a6;
+    }
+    #mod.TB {
+        color: white;
+        border-color: white;
+    }
+}
