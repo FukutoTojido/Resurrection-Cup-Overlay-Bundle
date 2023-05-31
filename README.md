@@ -9,6 +9,7 @@ Resurrection Cup Overlay + Showcase + ~~Mappool~~ (to be added soon)
 - In OBS, add a `Browser Source` with using the URL:
   - `http://127.0.0.1:24050/ResCupOverlay` for Main Overlay
   - `http://127.0.0.1:24050/ResCupOverlay/#/showcase` for Showcase Overlay
+  - `http://127.0.0.1:24050/ResCupOverlay/#/winner` for Winner Overlay
 - The source dimension should be `1920x1080`
   
 ## Edit the Mappool
@@ -26,3 +27,4 @@ Resurrection Cup Overlay + Showcase + ~~Mappool~~ (to be added soon)
 
 ## Screenshot
 ![1](https://i.imgur.com/IXvYb2U.jpeg)
+![2](https://i.imgur.com/VrzUaFN.png)
