@@ -26,5 +26,6 @@ Resurrection Cup Overlay + Showcase + Winner + ~~Mappool~~ (to be added soon)
 - To build the overlay, simply run `npm run build`, a `dist` folder will be created with all the assets needed for gosumemory.
 
 ## Screenshot
-![1](https://i.imgur.com/IXvYb2U.jpeg)
-![2](https://i.imgur.com/VrzUaFN.png)
+![1](https://i.imgur.com/lD66x9e.png)
+![2](https://i.imgur.com/IXvYb2U.jpeg)
+![3](https://i.imgur.com/VrzUaFN.png)
