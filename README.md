@@ -1,5 +1,5 @@
 # Resurrection Cup Overlay Bundle
-Resurrection Cup Overlay + Showcase + Winner + ~~Mappool~~ (to be added soon)
+Resurrection Cup Overlay + Showcase + Winner + Mappool (to be added soon)
 
 ## Install instruction
 - Download the latest release
@@ -10,6 +10,7 @@ Resurrection Cup Overlay + Showcase + Winner + ~~Mappool~~ (to be added soon)
   - `http://127.0.0.1:24050/ResCupOverlay` for Main Overlay
   - `http://127.0.0.1:24050/ResCupOverlay/#/showcase` for Showcase Overlay
   - `http://127.0.0.1:24050/ResCupOverlay/#/winner` for Winner Overlay
+  - `http://127.0.0.1:24050/ResCupOverlay/#/mappool` for Mappool Overlay
 - The source dimension should be `1920x1080`
   
 ## Edit the Mappool
@@ -29,3 +30,4 @@ Resurrection Cup Overlay + Showcase + Winner + ~~Mappool~~ (to be added soon)
 ![1](https://i.imgur.com/lD66x9e.png)
 ![2](https://i.imgur.com/IXvYb2U.jpeg)
 ![3](https://i.imgur.com/VrzUaFN.png)
+![4](https://i.imgur.com/R8gIK2W.png)
