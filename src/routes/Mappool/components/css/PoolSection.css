@@ -344,7 +344,7 @@
         height: 100%;
 
         padding: 10px;
-        
+
         z-index: -1;
 
         background-color: #252330;
@@ -383,15 +383,17 @@
     }
 
     .winner.left .iconWrapper {
-        outline-color: #F26C8C;
+        outline-color: #f26c8c;
     }
 
     .winner.right .iconWrapper {
-        outline-color: #81B1F8;
+        outline-color: #81b1f8;
     }
 
-    .winner.none .iconWrapper {
-        opacity: 0;
+    .winner.none {
+        .iconWrapper, img {
+            opacity: 0;
+        }
     }
 
     .winner .icon {
