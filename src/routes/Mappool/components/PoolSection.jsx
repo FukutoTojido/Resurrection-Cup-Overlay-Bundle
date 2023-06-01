@@ -52,7 +52,7 @@ const PickingRow = (props) => {
                                     style={{
                                         backgroundImage:
                                             rowData.winner !== "none"
-                                                ? `url(/team/${
+                                                ? `url(./team/${
                                                       jsonData.teamList.filter((t) => t.teamName === jsonData.team[rowData.winner]).shift()
                                                           .teamIconURL
                                                   })`
