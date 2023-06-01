@@ -1,10 +1,16 @@
 # Resurrection Cup Overlay Bundle
 Resurrection Cup Overlay + Showcase + Winner + Mappool (to be added soon)
 
+## Prerequiste
+- **[gosumemory](https://github.com/l3lackShark/gosumemory)**
+- **[Resurrection Cup Controller](https://github.com/FukutoTojido/Resurrection-Cup-Overlay-Controller)**
+
 ## Install instruction
 - Download the latest release
 - Extract the contents of the zip file and put them in a folder called `ResCupOverlay`
 - Copy the `ResCupOverlay` folder to `<your_gosumemory_path>/static/`
+- **RUN RESURRECTION CUP CONTROLLER FIRST**
+- Edit config.json
 - Run osu!, gosumemory and OBS
 - In OBS, add a `Browser Source` with using the URL:
   - `http://127.0.0.1:24050/ResCupOverlay` for Main Overlay
@@ -13,12 +19,68 @@ Resurrection Cup Overlay + Showcase + Winner + Mappool (to be added soon)
   - `http://127.0.0.1:24050/ResCupOverlay/#/mappool` for Mappool Overlay
 - The source dimension should be `1920x1080`
   
-## Edit the Mappool
+## Edit config (team icon, config.json)
 - Open `ResCupOverlay/config.json`
-- Edit the mappool
+- Edit the current round name
+- Edit the current match teams by the following json format:
+```json
+{
+	...,
+ 	"team": {
+		"left": "",
+		"right": "",
+	},
+	...
+}
+```
+- Edit the team list by the following json format:
+```json
+{
+	...,
+	"teamList": [
+		{
+			"teamName": "",				// String
+			"teamSeeding": 0,			// Number
+			"teamIconURL": "",			// String - The team icon file name in /team
+			"playerList": {
+				"playerName": [ "", "", ... ],	// String
+				"playerID": [ 0, 0, ...]		// Number, order should match with playerName above
+			}
+		},
+		{ ... }
+	],
+	...
+}
+```
+- Edit the mappool by the following json format:
+```json
+{
+	...,
+	"pool": {
+		"NM": [
+			{
+				"artist": "",
+				"title": "",
+				"creator": "",			// Mapper
+				"coverURL": "",			// https://assets.ppy.sh/beatmaps/<beatmapset-id>/covers/slimcover@2x.jpg
+				"diff":	"",				// Difficulty name
+				"id": 0					// Number - BEATMAP ID not BEATMAPSET ID
+			},
+			{ ... }
+		],
+		"HD": [ ... ],
+		"HR": [ ... ],
+		"DT": [ ... ],
+		"FM": [ ... ],
+		"TB": [ ... ]
+	}
+}
+```
+- Add team icon in `<your_gosumemory_path>/static/ResCupOverlay/team`
 
 ## Update the Overlay
-- Redo the `Install instructions`
+- Delete everything in `<your_gosumemory_path>/static/ResCupOverlay`
+- Follow the `Install instructions` again
 
 ## Developing
 - Clone the repository by `git clone https://github.com/FukutoTojido/Resurrection-Cup-Overlay-Bundle.git`
