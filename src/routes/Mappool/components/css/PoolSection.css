@@ -1,0 +1,405 @@
+@keyframes blink {
+    0% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.3);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+@keyframes wiggle {
+    0% {
+        translate: -2px 0;
+    }
+    50% {
+        translate: 2px 0;
+    }
+    100% {
+        translate: -2px 0;
+    }
+}
+
+#mappool {
+    #poolSection {
+        width: 100%;
+        height: 700px;
+
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+
+        gap: 20px 25px;
+    }
+
+    .poolSeparator {
+        position: relative;
+        width: 280px;
+        /* height: 100%; */
+    }
+
+    .leftArrow {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+
+        margin: auto 0;
+
+        width: 50px;
+        height: 50px;
+        background-image: url(/arrow.png);
+        background-size: cover;
+        background-position: center;
+
+        transition: ease-in-out 200ms;
+
+        animation: 1000ms wiggle infinite ease-in-out;
+    }
+
+    .rightArrow {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+
+        margin: auto 0;
+
+        width: 50px;
+        height: 50px;
+        background-image: url(/arrow.png);
+        background-size: cover;
+        background-position: center;
+
+        scale: -1 -1;
+        animation: 1000ms wiggle infinite ease-in-out;
+    }
+
+    .indicator.left .rightArrow {
+        opacity: 0;
+    }
+
+    .indicator.right .leftArrow {
+        opacity: 0;
+    }
+
+    .indicator.tb [class$="Arrow"] {
+        opacity: 0;
+    }
+
+    .indicator {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+
+        width: 220px;
+        height: 70px;
+
+        background-color: rgb(37, 35, 48, 0.8);
+        box-shadow: 0 4px 4px 0 rgb(0 0 0 /0.25);
+
+        border-radius: 15px;
+
+        text-align: center;
+        line-height: 70px;
+        color: #e7ada2;
+        font-weight: 800;
+
+        transition: ease-in-out 200ms;
+    }
+
+    .poolCol {
+        width: 550px;
+        /* height: 100%; */
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .poolCol.right > *,
+    .poolCol.left .mapInfoContainer {
+        flex-direction: row;
+    }
+
+    .poolCol.left > *,
+    .poolCol.right .mapInfoContainer {
+        flex-direction: row-reverse;
+    }
+
+    .row {
+        width: 100%;
+        height: 70px;
+
+        display: flex;
+        gap: 25px;
+    }
+
+    .row.tb {
+        justify-content: center;
+    }
+
+    .banNode {
+        position: relative;
+
+        width: 160px;
+        height: 100%;
+
+        border-radius: 15px;
+
+        background-color: rgb(37, 35, 48, 0.8);
+        padding: 4px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        font-weight: 800;
+        color: #e7ada2;
+
+        box-shadow: 0 4px 4px 0 rgb(0 0 0 /0.25);
+    }
+
+    .banNode.banned {
+        border: solid #f3306a 3px;
+        animation: 500ms blink 5;
+    }
+
+    .pickNode {
+        position: relative;
+
+        width: 450px;
+        height: 100%;
+
+        border-radius: 15px;
+
+        background-color: rgb(37, 35, 48, 0.8);
+        padding: 4px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        font-weight: 800;
+        color: #e7ada2;
+
+        box-shadow: 0 4px 4px 0 rgb(0 0 0 /0.25);
+    }
+
+    .pickNode.picked {
+        border: solid #e7ada2 3px;
+        animation: 500ms blink 5;
+
+        background-color: black;
+    }
+
+    .mapInfoContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+        align-content: center;
+        gap: 10px;
+    }
+
+    .metadata {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0;
+
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .artistTitle {
+        width: 100%;
+
+        font-size: 13px;
+        font-weight: 800;
+        color: white;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .diffMapper {
+        font-size: 11px;
+        font-weight: 600;
+        color: white;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .left .artistTitle,
+    .left .diffMapper {
+        text-align: right;
+    }
+
+    .right .artistTitle,
+    .right .diffMapper {
+        text-align: left;
+    }
+
+    .tb .artistTitle,
+    .tb .diffMapper {
+        text-align: center;
+    }
+
+    .image {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 10px;
+
+        /* background-image: url("https://i.imgur.com/0sKk069.jpg"); */
+        background-size: cover;
+        background-position: center;
+
+        opacity: 0.3;
+    }
+
+    .modsFlair {
+        position: absolute;
+        /* inset: 0 0 0 0;
+        margin: auto; */
+
+        padding: 5px 15px;
+
+        color: #11131c;
+        font-weight: 800;
+        text-align: center;
+        font-size: 15px;
+
+        background-color: rgb(37, 35, 48, 0.5);
+        border-radius: 10px;
+        border: solid 3px white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        backdrop-filter: blur(20px);
+        box-shadow: 0 4px 4px rgb(0 0 0 /0.25);
+    }
+
+    .mapInfoContainer .modsFlair {
+        position: initial;
+        inset: auto;
+        margin: 0;
+    }
+
+    .modsFlair.NM {
+        border-color: #9bc1e4;
+        color: #9bc1e4;
+    }
+
+    .modsFlair.HD {
+        border-color: #f2df99;
+        color: #f2df99;
+    }
+
+    .modsFlair.HR {
+        border-color: #eb9999;
+        color: #eb9999;
+    }
+
+    .modsFlair.DT {
+        border-color: #cea3ff;
+        color: #cea3ff;
+    }
+
+    .modsFlair.FM {
+        border-color: #c7e1a6;
+        color: #c7e1a6;
+    }
+    .modsFlair.TB {
+        border-color: white;
+        color: white;
+    }
+
+    .winner {
+        position: absolute;
+
+        width: 550px;
+        height: 100%;
+
+        padding: 10px;
+        
+        z-index: -1;
+
+        background-color: #252330;
+        border-radius: 15px;
+        box-shadow: 0 4px 4px rgb(0 0 0 /0.25);
+        transition: ease-in-out 200ms;
+
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .left .winner {
+        right: 0;
+        flex-direction: row;
+    }
+
+    .right .winner {
+        left: 0;
+        flex-direction: row-reverse;
+    }
+
+    .winner.none {
+        width: 100%;
+    }
+
+    .iconWrapper {
+        width: 40px;
+        height: 40px;
+
+        padding: 3px;
+        background-color: black;
+        border-radius: 20px;
+
+        outline: solid 3px white;
+    }
+
+    .winner.left .iconWrapper {
+        outline-color: #F26C8C;
+    }
+
+    .winner.right .iconWrapper {
+        outline-color: #81B1F8;
+    }
+
+    .winner.none .iconWrapper {
+        opacity: 0;
+    }
+
+    .winner .icon {
+        width: 100%;
+        height: 100%;
+    }
+
+    .winner img {
+        height: 24px;
+    }
+}

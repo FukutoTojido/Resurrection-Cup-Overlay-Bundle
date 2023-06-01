@@ -68,3 +68,25 @@ body {
     width: 1920px;
     height: 1080px;
 }
+
+/*Scrollbar*/
+
+::-webkit-scrollbar {
+    width: 10px;
+    display: none;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    visibility: 0;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: none;
+    border-radius: 10px;
+}

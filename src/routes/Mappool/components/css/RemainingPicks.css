@@ -1,0 +1,88 @@
+#mappool {
+    #remainingPicks {
+        position: relative;
+        width: 50%;
+        height: 100%;
+
+        padding: 20px 60px;
+
+        border-radius: 15px 0 15px 15px;
+        background-color: rgb(37, 35, 48, 0.8);
+
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .remainLabel {
+        position: absolute;
+        background-color: rgb(37, 35, 48, 0.8);
+        backdrop-filter: blur(80px);
+
+        top: -30px;
+        right: 0;
+
+        width: 200px;
+
+        font-weight: 700;
+        color: #e7ada2;
+
+        padding: 10px;
+        border-radius: 15px 15px 0 15px;
+        border: solid 3px #e7ada2;
+
+        text-align: center;
+        /* box-shadow: 0 4px 4px rgba(0 0 0 /0.25); */
+    }
+
+    .modContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-auto-flow: row;
+        gap: 10px;
+    }
+
+    .mapNode {
+        color: #1a1c2b;
+        font-weight: 800;
+        font-size: 15px;
+
+        padding: 5px 15px;
+        border-radius: 10px;
+        border: solid 3px white;
+
+        transition: ease-in-out 200ms;
+    }
+
+    .mapNode.NM {
+        border-color: #9bc1e4;
+        color: #9bc1e4;
+    }
+
+    .mapNode.HD {
+        border-color: #f2df99;
+        color: #f2df99;
+    }
+
+    .mapNode.HR {
+        border-color: #eb9999;
+        color: #eb9999;
+    }
+
+    .mapNode.DT {
+        border-color: #cea3ff;
+        color: #cea3ff;
+    }
+
+    .mapNode.FM {
+        border-color: #c7e1a6;
+        color: #c7e1a6;
+    }
+
+    .mapNode.picked {
+        opacity: 20%;
+    }
+}

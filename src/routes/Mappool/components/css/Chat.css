@@ -1,0 +1,52 @@
+#mappool {
+    #chatContainer {
+        position: relative;
+        width: 50%;
+        height: 100%;
+
+        background-color: #252330;
+        border-radius: 15px;
+
+        padding: 20px;
+    }
+
+    .chatWrapper {
+        width: 100%;
+        height: 100%;
+        overflow: overlay;
+    }
+
+    .chat {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        
+        font-size: 15px;
+    }
+
+    .chatTime {
+        width: 40px;
+        color: #E7ADA2;
+        font-weight: 500;
+    }
+
+    .chatName {
+        width: 160px;
+        font-weight: 700;
+        color: #E7ADA2;
+    }
+
+    .chatName.left {
+        color: #F26C8C;
+    }
+
+    .chatName.right {
+        color: #81B1F8;
+    }
+
+    .chatMes {
+        flex: 1;
+        font-weight: 400;
+    }
+}
