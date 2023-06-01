@@ -61,6 +61,7 @@ const modsParse = {
 
 function Overlay() {
     const [socketData, setSocketData] = useState({});
+    const [naviStatus, setNaviStatus] = useState({});
     const [mapId, setMapId] = useState(0);
 
     const [startLeft, setStartLeft] = useState(0);
@@ -143,6 +144,22 @@ function Overlay() {
         shouldReconnect: (closeEvent) => true,
     });
 
+    const wsController = useWebSocket("ws://localhost:3727/ws", {
+        onOpen: () => {
+            console.log("Controller WebSocket Connected");
+        },
+        onMessage: (event) => {
+            if (event.data[0] !== "{") return;
+            const mes = JSON.parse(event.data);
+
+            switch (mes.type) {
+                case "setNaviStatus":
+                    setNaviStatus(mes.data);
+                    break;
+            }
+        },
+    });
+
     const getMapStat = async (mod) => {
         const folderPath = encodeURIComponent(socketData.menu.bm.path.folder);
         const osuFile = encodeURIComponent(socketData.menu.bm.path.file);
@@ -197,8 +214,8 @@ function Overlay() {
     }, [mapId]);
 
     useEffect(() => {
-        document.title = "Resurrection Cup Overlay"
-    }, [])
+        document.title = "Resurrection Cup Overlay";
+    }, []);
 
     return JSON.stringify(socketData) !== "{}" ? (
         <div id="App">
@@ -218,7 +235,7 @@ function Overlay() {
                 <div className="bottomBar">
                     <Team pos="left" socketData={socketData} />
                     <Team pos="right" socketData={socketData} />
-                    <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} />
+                    <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} naviStatus={naviStatus}/>
                     <div className="scoreContainer">
                         <div
                             className={`score left ${

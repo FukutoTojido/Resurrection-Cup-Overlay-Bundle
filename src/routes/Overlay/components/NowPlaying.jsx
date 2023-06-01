@@ -1,8 +1,19 @@
-import "./css/NowPlaying.css"
+import "./css/NowPlaying.css";
 
 const NowPlaying = (props) => {
     return (
-        <div className="nowPlaying">
+        <div
+            className="nowPlaying"
+            style={{
+                borderColor: props.naviStatus.team
+                    ? props.naviStatus.team === "left"
+                        ? "#F26C8C"
+                        : props.naviStatus.team === "right"
+                        ? "#81B1F8"
+                        : "#E7ADA2"
+                    : "#E7ADA2",
+            }}
+        >
             <div className="mapBG">
                 <div className="wrapper">
                     <img
@@ -54,4 +65,4 @@ const NowPlaying = (props) => {
     );
 };
 
-export default NowPlaying
+export default NowPlaying;
