@@ -1,5 +1,5 @@
 # Resurrection Cup Overlay Bundle
-Resurrection Cup Overlay + Showcase + Winner + Mappool (to be added soon)
+Resurrection Cup Overlay + Showcase + Winner + Mappool
 
 ## Prerequiste
 - **[gosumemory](https://github.com/l3lackShark/gosumemory)**
