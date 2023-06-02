@@ -1,7 +1,11 @@
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState, useEffect, createContext, useCallback } from "react";
 import useWebSocket from "react-use-websocket";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 import "./Mappool.css";
+
+import particlesJson from "../../../public/particles.json";
 
 import Player from "./components/Player";
 import PoolSection from "./components/PoolSection";
@@ -43,7 +47,7 @@ function Mappool() {
                     const tempNavi = { ...controllerData };
                     tempNavi.status.naviStatus = mes.data;
                     setControllerData(tempNavi);
-                    break; 
+                    break;
             }
         },
         onClose: () => {
@@ -71,6 +75,12 @@ function Mappool() {
         },
     });
 
+    const particlesInit = useCallback(async (engine) => {
+        await loadFull(engine);
+    }, []);
+
+    const particlesLoaded = useCallback(async (container) => {}, []);
+
     useEffect(() => {
         if (!isWsInit && connectStatus) wsController.sendJsonMessage({ type: "askInit" }, false);
         if (isWsInit && connectStatus && JSON.stringify(controllerData) === "{}") wsController.sendJsonMessage({ type: "fetchData" }, false);
@@ -80,12 +90,15 @@ function Mappool() {
         <div id="App">
             <div id="mappool">
                 <div className="bg"></div>
+                <Particles className="particles" init={particlesInit} loaded={particlesLoaded} options={particlesJson} />
                 {JSON.stringify(controllerData) !== "{}" ? (
                     JSON.stringify(socketData) !== "{}" ? (
-                        <ControllerDataContext.Provider value={{
-                            controllerData,
-                            socketData
-                        }}>
+                        <ControllerDataContext.Provider
+                            value={{
+                                controllerData,
+                                socketData,
+                            }}
+                        >
                             <Player />
                             <PoolSection />
                             <BottomSection />

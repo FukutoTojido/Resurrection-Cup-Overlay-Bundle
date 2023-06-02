@@ -12,6 +12,12 @@
         background-position: center;
 
         clip-path: polygon(0 0, 0 1080px, 0 1080px, 0 100px, 1920px 100px, 1920px 820px, 0 820px, 0 1080px, 100% 100%, 1920px 0);
+
+        filter: blur(30px)
+    }
+
+    .particles {
+        clip-path: polygon(0 0, 0 1080px, 0 1080px, 0 100px, 1920px 100px, 1920px 820px, 0 820px, 0 1080px, 100% 100%, 1920px 0);
     }
 
     .topBar {
@@ -24,7 +30,7 @@
         background-color: rgb(30, 28, 39, 0.8);
         /* box-shadow: 0 4px 10px 0 rgb(0 0 0 / 0.5); */
 
-        backdrop-filter: blur(80px);
+        /* backdrop-filter: blur(80px); */
 
         display: flex;
         align-items: center;
@@ -69,7 +75,7 @@
         background-color: rgb(30, 28, 39, 0.5);
         /* box-shadow: 0 -4px 10px 0 rgb(0 0 0 / 0.5); */
 
-        backdrop-filter: blur(30px);
+        /* backdrop-filter: blur(30px); */
     }
 
     .team {

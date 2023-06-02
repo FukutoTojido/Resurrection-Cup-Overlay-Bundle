@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import useWebSocket from "react-use-websocket";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 import "./Winner.css";
 
 import jsonData from "../../../public/config.json";
+import particlesJson from "../../../public/particles.json";
 
 const Winner = () => {
     const [socketData, setSocketData] = useState({});
@@ -28,6 +31,12 @@ const Winner = () => {
         },
     });
 
+    const particlesInit = useCallback(async (engine) => {
+        await loadFull(engine);
+    }, []);
+
+    const particlesLoaded = useCallback(async (container) => {}, [])
+
     useEffect(() => {
         document.title = "Resurrection Cup Winner"
     }, [])
@@ -35,6 +44,7 @@ const Winner = () => {
     return (
         <div id="App">
             <div id="winner">
+                <Particles className="particles" init={particlesInit} loaded={particlesLoaded} options={particlesJson} />
                 <div className="content">
                     <img src="./Logo.png" />
                     <div className="teamInfo">

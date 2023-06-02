@@ -1,6 +1,8 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import useWebSocket from "react-use-websocket";
 import { useCountUp } from "use-count-up";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 import osuPerformance from "../../../lib/osujs";
 
@@ -8,6 +10,7 @@ import NowPlaying from "./components/NowPlaying";
 
 import "./Overlay.css";
 import jsonData from "../../../public/config.json";
+import particlesJson from "../../../public/particles.json";
 
 const Team = (props) => {
     return (
@@ -213,6 +216,12 @@ function Overlay() {
         return ret;
     }, [mapId]);
 
+    const particlesInit = useCallback(async (engine) => {
+        await loadFull(engine);
+    }, []);
+
+    const particlesLoaded = useCallback(async (container) => {}, [])
+
     useEffect(() => {
         document.title = "Resurrection Cup Overlay";
     }, []);
@@ -221,6 +230,7 @@ function Overlay() {
         <div id="App">
             <div id="overlay">
                 <div className="bg"></div>
+                <Particles className="particles" init={particlesInit} loaded={particlesLoaded} options={particlesJson} />
                 <div className="topBar">
                     <div className="logo">
                         <img src="./Logo.png" />
@@ -235,7 +245,7 @@ function Overlay() {
                 <div className="bottomBar">
                     <Team pos="left" socketData={socketData} />
                     <Team pos="right" socketData={socketData} />
-                    <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} naviStatus={naviStatus}/>
+                    <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} naviStatus={naviStatus} />
                     <div className="scoreContainer">
                         <div
                             className={`score left ${
