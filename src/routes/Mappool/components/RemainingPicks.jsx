@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 
 import "./css/RemainingPicks.css";
-import jsonData from "../../../../public/config.json";
+// import jsonData from "../../../../public/config.json";
 
 import { ControllerDataContext } from "../Mappool";
 
 const RemainingPicks = () => {
-    const { controllerData } = useContext(ControllerDataContext);
+    const { controllerData, json } = useContext(ControllerDataContext);
     const [pickedMaps, setPickedMaps] = useState([]);
 
     useEffect(() => {
@@ -24,11 +24,11 @@ const RemainingPicks = () => {
     return (
         <div id="remainingPicks">
             <div className="remainLabel">Remaining Picks</div>
-            {Object.keys(jsonData.pool).map((mod) => {
+            {Object.keys(json.pool).map((mod) => {
                 if (mod === "TB") return ""
                 return (
                     <div className="modContainer" key={mod}>
-                        {jsonData.pool[mod].map((map, idx) => {
+                        {json.pool[mod].map((map, idx) => {
                             return <div className={`mapNode ${mod} ${pickedMaps.includes(`${mod}${idx + 1}`) ? "picked" : ""}`} key={idx}>{`${mod}${idx + 1}`}</div>
                         })}
                     </div>

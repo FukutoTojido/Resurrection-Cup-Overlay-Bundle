@@ -17,6 +17,7 @@ const ControllerDataContext = createContext();
 function Mappool() {
     const [controllerData, setControllerData] = useState({});
     const [socketData, setSocketData] = useState({});
+    const [json, setJson] = useState({});
     const [isWsInit, setIsWsInit] = useState(false);
     const [connectStatus, setConnectStatus] = useState(false);
 
@@ -81,6 +82,23 @@ function Mappool() {
 
     const particlesLoaded = useCallback(async (container) => {}, []);
 
+    const loadJsonData = async () => {
+        const res = await fetch("./config.json");
+        const data = await res.json();
+
+        if (JSON.stringify(data) !== JSON.stringify(json)) setJson(data);
+    };
+
+    useEffect(() => {
+        document.title = "Resurrection Cup Mappool";
+        loadJsonData();
+        const interval = setInterval(loadJsonData, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
     useEffect(() => {
         if (!isWsInit && connectStatus) wsController.sendJsonMessage({ type: "askInit" }, false);
         if (isWsInit && connectStatus && JSON.stringify(controllerData) === "{}") wsController.sendJsonMessage({ type: "fetchData" }, false);
@@ -92,11 +110,12 @@ function Mappool() {
                 <div className="bg"></div>
                 <Particles className="particles" init={particlesInit} loaded={particlesLoaded} options={particlesJson} />
                 {JSON.stringify(controllerData) !== "{}" ? (
-                    JSON.stringify(socketData) !== "{}" ? (
+                    JSON.stringify(socketData) !== "{}" && JSON.stringify(json) !== "{}" ? (
                         <ControllerDataContext.Provider
                             value={{
                                 controllerData,
                                 socketData,
+                                json
                             }}
                         >
                             <Player />

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import useWebSocket from "react-use-websocket";
 
 import "./Showcase.css";
-import jsonData from "../../../public/config.json";
+// import jsonData from "../../../public/config.json";
 
 function Showcase() {
     const [socketData, setSocketData] = useState({});
+    const [json, setJson] = useState({});
     const [modId, setModId] = useState("");
 
     const ws = useWebSocket("ws://127.0.0.1:24050/ws", {
@@ -23,8 +24,8 @@ function Showcase() {
             ) {
                 setSocketData(data);
                 setModId("??");
-                for (const mod of Object.keys(jsonData.pool)) {
-                    jsonData.pool[mod].forEach((map, idx) => {
+                for (const mod of Object.keys(json.pool)) {
+                    json.pool[mod].forEach((map, idx) => {
                         if (
                             map.id === data.menu.bm.id ||
                             (map.artist === data.menu.bm.metadata.artist &&
@@ -41,11 +42,24 @@ function Showcase() {
         shouldReconnect: (closeEvent) => true,
     });
 
-    useEffect(() => {
-        document.title = "Resurrection Cup Showcase"
-    }, [])
+    const loadJsonData = async () => {
+        const res = await fetch("./config.json");
+        const data = await res.json();
 
-    return JSON.stringify(socketData) !== "{}" && socketData.menu ? (
+        if (JSON.stringify(data) !== JSON.stringify(json)) setJson(data);
+    };
+
+    useEffect(() => {
+        document.title = "Resurrection Cup Showcase";
+        loadJsonData();
+        const interval = setInterval(loadJsonData, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
+    return JSON.stringify(socketData) !== "{}" && socketData.menu && JSON.stringify(json) !== "{}" ? (
         <div id="App">
             <div id="showcase">
                 <div id="stats">

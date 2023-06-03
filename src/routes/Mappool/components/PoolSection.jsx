@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import "./css/PoolSection.css";
 
 import { ControllerDataContext } from "../Mappool";
-import jsonData from "../../../../public/config.json";
+// import jsonData from "../../../../public/config.json";
 
 const BanNode = (props) => {
     const { controllerData } = useContext(ControllerDataContext);
@@ -33,7 +33,7 @@ const BanNode = (props) => {
 };
 
 const PickingRow = (props) => {
-    const { controllerData } = useContext(ControllerDataContext);
+    const { controllerData, json } = useContext(ControllerDataContext);
     const [rowData, setRowData] = useState(controllerData.status.poolStatus[props.pos][props.type][props.idx]);
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const PickingRow = (props) => {
                                         backgroundImage:
                                             rowData.winner !== "none"
                                                 ? `url(./team/${
-                                                      jsonData.teamList.filter((t) => t.teamName === jsonData.team[rowData.winner]).shift()
+                                                    json.teamList.filter((t) => t.teamName === json.team[rowData.winner]).shift()
                                                           .teamIconURL
                                                   })`
                                                 : "",

@@ -1,220 +1,194 @@
 {
-    "round": "Grand Finals",
+    "round": "Quarterfinals",
     "team": {
-        "left": "brown ryo",
-        "right": "BOCCHI THE BLOCK"
+        "left": "Ryose1",
+        "right": "mdneko"
     },
+    "bestOf": 13,
+    "nBans": 2,
     "teamList": [
         {
-            "teamName": "brown ryo",
+            "teamName": "Ryose1",
             "teamSeeding": -2,
             "teamIconURL": "-2.png",
             "playerList": {
-                "playerName": [
-                    "[Boy]DaLat",
-                    "_Freedom_",
-                    "Umee",
-                    "KazutoGGO",
-                    "baoo",
-                    "hotcat190",
-                    "Okayu ASMR",
-                    "PolKet"
-                ],
-                "playerID": [
-                    8266808,
-                    3999831,
-                    12143654,
-                    7662077,
-                    11021073,
-                    10143086,
-                    9685975,
-                    14065788
-                ]
+                "playerName": ["Ryose1"],
+                "playerID": [20773192]
             }
         },
         {
-            "teamName": "BOCCHI THE BLOCK",
+            "teamName": "mdneko",
             "teamSeeding": -1,
             "teamIconURL": "-1.jpg",
             "playerList": {
-                "playerName": [
-                    "baoo",
-                    "hotcat190",
-                    "Okayu ASMR",
-                    "PolKet"
-                ],
-                "playerID": [
-                    11021073,
-                    10143086,
-                    9685975,
-                    14065788
-                ]
+                "playerName": ["mdneko"],
+                "playerID": [11567874]
             }
         }
     ],
     "pool": {
         "NM": [
             {
-                "artist": "ZAQ",
-                "title": "Last Proof",
-                "creator": "rollpan",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1550326/covers/slimcover@2x.jpg?1631462441",
-                "diff": "NM1",
-                "id": 3168035
+                "artist": "ShinRa-Bansho",
+                "title": "Zenryoku Happy Life",
+                "creator": "Asagi",
+                "coverURL": "https://assets.ppy.sh/beatmaps/819611/covers/cover.jpg",
+                "diff": "Extra",
+                "id": 1837214
             },
             {
-                "artist": "DUAL ALTER WORLD",
-                "title": "Dimension Expander",
-                "creator": "Dada",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1863131/covers/slimcover@2x.jpg?1667741455",
-                "diff": "Pepsi",
-                "id": 3831190
+                "artist": "Keeno",
+                "title": "Lights On",
+                "creator": "Plasma",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1950234/covers/cover.jpg",
+                "diff": "Streams",
+                "id": 4037812
             },
             {
-                "artist": "RichaadEB",
-                "title": "Night of Fire",
-                "creator": "Suki007",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1456806/covers/slimcover@2x.jpg?1651446044",
-                "diff": "Showdown",
-                "id": 2994140
+                "artist": "Islet feat. isui",
+                "title": "Hakujitsumu",
+                "creator": "Flame Haze",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1897177/covers/cover.jpg",
+                "diff": "Kanui's Expert",
+                "id": 3970481
             },
             {
-                "artist": "3R2",
-                "title": "Blow My Mind (tpz Overheat Remix)",
-                "creator": "Smug Nanachi",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1602202/covers/slimcover@2x.jpg?1636887670",
-                "diff": ">NEKO#owo::Black_Market::CHAOS(15)",
-                "id": 3271906
+                "artist": "Zekk",
+                "title": "Freefall",
+                "creator": "Fursum",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1544463/covers/cover.jpg",
+                "diff": "Extra",
+                "id": 3156885
             },
             {
-                "artist": "Powerless",
-                "title": "Noblesse Oblige (Long Version)",
-                "creator": "[Boy]DaLat",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1878939/covers/slimcover@2x.jpg?1683482735",
-                "diff": "Noblicia Melodica",
-                "id": 3868006
+                "artist": "Lite Show Magic",
+                "title": "R'N'R Monsta",
+                "creator": "VoiceCore",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1969431/covers/cover.jpg",
+                "diff": "Expert",
+                "id": 4085412
             }
         ],
         "HD": [
             {
-                "artist": "Unlucky Morpheus",
-                "title": "Top of the \"M\"",
-                "creator": "Camo",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1302388/covers/slimcover@2x.jpg?1650706171",
-                "diff": "Isomir's Extreme",
-                "id": 2843995
+                "artist": "Sangatsu no Phantasia",
+                "title": "Ao ni Minasoko",
+                "creator": "domSaur",
+                "coverURL": "https://assets.ppy.sh/beatmaps/924550/covers/cover.jpg",
+                "diff": "Dubturt's Extra",
+                "id": 1946789
+            },
+            {
+                "artist": "-45",
+                "title": "Kurenaikakei",
+                "creator": "Okoratu",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1893565/covers/cover.jpg",
+                "diff": "allein's Insane",
+                "id": 3982739
             },
             {
                 "artist": "Mitsukiyo",
                 "title": "Rolling Beat",
-                "creator": "Bearizm",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1918662/covers/slimcover@2x.jpg?1679376636",
-                "diff": "Mythic",
-                "id": 3959365
-            },
-            {
-                "artist": "Coconatsu",
-                "title": "Ronron e Rairairai!",
-                "creator": "Fushimi Rio",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1824521/covers/slimcover@2x.jpg?1662399074",
-                "diff": "extRa",
-                "id": 3743840
+                "creator": "too",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1367155/covers/cover.jpg",
+                "diff": "Insane",
+                "id": 2846585
             }
         ],
         "HR": [
             {
-                "artist": "Itowokashi",
-                "title": "Kanadeai",
-                "creator": "Flask",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1089616/covers/slimcover@2x.jpg?1650694898",
-                "diff": "Twin Star",
-                "id": 2278105
+                "artist": "LiSA",
+                "title": "Tsumibito",
+                "creator": "Rosiie",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1370775/covers/cover.jpg",
+                "diff": "Star's Insane",
+                "id": 2861767
             },
             {
-                "artist": "PSYQUI",
-                "title": "Decay",
-                "creator": "JeZag",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1454318/covers/slimcover@2x.jpg?1644175818",
-                "diff": "Desolation",
-                "id": 2996890
+                "artist": "Nekomata Master",
+                "title": "Greening",
+                "creator": "CallieCube",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1549090/covers/cover.jpg",
+                "diff": "Muya's Another",
+                "id": 4068018
             },
             {
-                "artist": "Feryquitous",
-                "title": "Quon-Extend-",
-                "creator": "captin1",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1362537/covers/slimcover@2x.jpg?1616565640",
-                "diff": "hit da quon",
-                "id": 2819029
+                "artist": "Maozon",
+                "title": "Stasis",
+                "creator": "VoiceCore",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1731654/covers/cover.jpg",
+                "diff": "AuroraE's Insane",
+                "id": 3700498
             }
         ],
         "DT": [
             {
-                "artist": "mamenoi",
-                "title": "Kleinchen",
-                "creator": "SatonoDiamond",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1884880/covers/slimcover@2x.jpg?1670787081",
-                "diff": "Radiant",
-                "id": 3880866
+                "artist": "Triad Primus",
+                "title": "Trancing Pulse",
+                "creator": "Ayalis",
+                "coverURL": "https://assets.ppy.sh/beatmaps/450406/covers/cover.jpg",
+                "diff": "Coll@b",
+                "id": 966335
             },
             {
-                "artist": "senya",
-                "title": "Nihil Kagura",
-                "creator": "Satellite",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1874741/covers/slimcover@2x.jpg?1669406487",
-                "diff": "Lunatic",
-                "id": 3857700
+                "artist": "Hana",
+                "title": "Gekka Jasmine (2014ver.)",
+                "creator": "PinkHeart",
+                "coverURL": "https://assets.ppy.sh/beatmaps/408745/covers/cover.jpg",
+                "diff": "Gyro's Light Insane",
+                "id": 1035068
             },
             {
-                "artist": "Katakiri Rekka",
-                "title": "TSUBASA",
-                "creator": "Kowari",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1859605/covers/slimcover@2x.jpg?1665873591",
-                "diff": "INSANE",
-                "id": 3822652
-            },
-            {
-                "artist": "Rin",
-                "title": "Eientewi set 13 ~ Extend Ash",
-                "creator": "Halfslashed",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1262466/covers/slimcover@2x.jpg?1650701559",
-                "diff": "Mentai's Insane",
-                "id": 2624072
+                "artist": "Imy",
+                "title": "Meteora",
+                "creator": "Icekalt",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1129440/covers/cover.jpg",
+                "diff": "Daycore's Hard",
+                "id": 2689749
             }
         ],
         "FM": [
             {
-                "artist": "Project Gabbangelion",
-                "title": "Lolit Speed (Cut Ver.)",
-                "creator": "alden",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1610082/covers/slimcover@2x.jpg?1637521290",
-                "diff": "crack collab",
-                "id": 3287485
+                "artist": "cillia",
+                "title": "7/8",
+                "creator": "-White",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1684100/covers/cover.jpg",
+                "diff": "AndAda's Insane",
+                "id": 3927086
             },
             {
-                "artist": "USAO",
-                "title": "Knight Rider (Extended Mix)",
-                "creator": "SkyFlame",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1910255/covers/slimcover@2x.jpg?1674424877",
-                "diff": "Calamity",
-                "id": 3940190
-            },
-            {
-                "artist": "Silver Forest",
-                "title": "Tsurupettan (Game Ver.)",
-                "creator": "Bloxi",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1615177/covers/slimcover@2x.jpg?1659784674",
-                "diff": "Extra Stage",
-                "id": 3535586
+                "artist": "Carpool Tunnel",
+                "title": "Afterlight",
+                "creator": "_Epreus",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1001546/covers/cover.jpg",
+                "diff": "Insane",
+                "id": 2162331
             }
         ],
         "TB": [
             {
-                "artist": "Sad Keyboard Guy, sleepless & Myntian",
-                "title": "Alter//Strife feat. vally.exe",
-                "creator": "Alvearia",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1881706/covers/slimcover@2x.jpg?1670337054",
-                "diff": "Sharded Memories Into Spaces Once Gone",
-                "id": 3873990
+                "artist": "F9",
+                "title": "Kagaribito",
+                "creator": "ponbot",
+                "coverURL": "https://assets.ppy.sh/beatmaps/1734430/covers/cover.jpg",
+                "diff": "Extra feat. Satellite",
+                "id": 3545050
+            },
+            {
+                "artist": "Shoji Meguro",
+                "title": "Kimi no Kioku (Aethral Remix)",
+                "creator": "Akali",
+                "coverURL": "https://assets.ppy.sh/beatmaps/490662/covers/cover.jpg",
+                "diff": "Remembrance",
+                "id": 1045757
+            },
+            {
+                "artist": "PSYQUI",
+                "title": "Hype feat. Such",
+                "creator": "NyarkoO",
+                "coverURL": "https://assets.ppy.sh/beatmaps/777596/covers/cover.jpg",
+                "diff": "Dreamer",
+                "id": 1633532
             }
         ]
     }

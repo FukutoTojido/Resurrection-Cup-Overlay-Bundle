@@ -9,7 +9,7 @@ import osuPerformance from "../../../lib/osujs";
 import NowPlaying from "./components/NowPlaying";
 
 import "./Overlay.css";
-import jsonData from "../../../public/config.json";
+// import jsonData from "../../../public/config.json";
 import particlesJson from "../../../public/particles.json";
 
 const Team = (props) => {
@@ -18,11 +18,13 @@ const Team = (props) => {
             <div
                 className="icon"
                 style={{
-                    backgroundImage: `url("./team/${jsonData.teamList.filter((t) => t.teamName === jsonData.team[props.pos]).shift().teamIconURL}")`,
+                    backgroundImage: `url("./team/${
+                        props.jsonData.teamList?.filter((t) => t.teamName === props.jsonData.team?.[props.pos]).shift().teamIconURL
+                    }")`,
                 }}
             ></div>
             <div className="nameStar">
-                <div className="name">{jsonData.team[props.pos]}</div>
+                <div className="name">{props.jsonData.team?.[props.pos]}</div>
                 {props.socketData.tourney?.manager.bools.starsVisible ? (
                     <div className="starContainer">
                         {[...Array(props.socketData.tourney?.manager.bestOF ? Math.ceil(props.socketData.tourney.manager.bestOF / 2) : 0).keys()].map(
@@ -69,6 +71,7 @@ const modsParse = {
 function Overlay() {
     const [socketData, setSocketData] = useState({});
     const [naviStatus, setNaviStatus] = useState({});
+    const [json, setJson] = useState({});
     const [mapId, setMapId] = useState(0);
 
     const [startLeft, setStartLeft] = useState(0);
@@ -127,7 +130,7 @@ function Overlay() {
                 data.menu.bm.id !== socketData.menu?.bm.id ||
                 data.menu.bm.stats.fullSR !== socketData.menu?.bm.stats.fullSR ||
                 data.tourney.manager.bestOF !== socketData.tourney?.manager.bestOF ||
-                data.tourney.manager.bools.starsVisible !== socketData.tourney?.manager.bools.starsVisible ||
+                JSON.stringify(data.tourney.manager.bools) !== JSON.stringify(socketData.tourney?.manager.bools) ||
                 JSON.stringify(data.tourney.manager.teamName) !== JSON.stringify(socketData.tourney.manager.teamName) ||
                 JSON.stringify(data.tourney.manager.stars) !== JSON.stringify(socketData.tourney.manager.stars) ||
                 JSON.stringify(data.tourney.manager.gameplay.score) !== JSON.stringify(socketData.tourney.manager.gameplay.score)
@@ -142,6 +145,22 @@ function Overlay() {
 
                     leftCountUp.reset();
                     rightCountUp.reset();
+                }
+                if (!data.tourney.manager.bools.scoreVisible && socketData.tourney?.manager.bools.scoreVisible && data.tourney.manager.bools.starsVisible) {
+                    const winningSide =
+                    socketData.tourney.manager.gameplay.score.left > socketData.tourney.manager.gameplay.score.right
+                            ? "left"
+                            : socketData.tourney.manager.gameplay.score.left < socketData.tourney.manager.gameplay.score.right
+                            ? "right"
+                            : "none";
+
+                    wsController.sendJsonMessage({
+                        type: "setWinner",
+                        data: {
+                            winner: winningSide,
+                            map: modId
+                        },
+                    });
                 }
                 setSocketData(data);
             }
@@ -200,15 +219,15 @@ function Overlay() {
     const modId = useMemo(() => {
         let ret = "??";
 
-        if (socketData.menu) {
-            for (const mod of Object.keys(jsonData.pool)) {
-                for (let i = 0; i < jsonData.pool[mod].length; i++) {
+        if (socketData.menu && json.pool) {
+            for (const mod of Object.keys(json.pool)) {
+                for (let i = 0; i < json.pool?.[mod].length ? 0 : json.pool[mod].length; i++) {
                     if (
-                        jsonData.pool[mod][i].id === mapId ||
-                        (jsonData.pool[mod][i].artist === socketData.menu.bm.metadata.artist &&
-                            jsonData.pool[mod][i].title === socketData.menu.bm.metadata.title &&
-                            jsonData.pool[mod][i].diff === socketData.menu.bm.metadata.difficulty &&
-                            jsonData.pool[mod][i].creator === socketData.menu.bm.metadata.mapper)
+                        json.pool[mod][i].id === mapId ||
+                        (json.pool[mod][i].artist === socketData.menu.bm.metadata.artist &&
+                            json.pool[mod][i].title === socketData.menu.bm.metadata.title &&
+                            json.pool[mod][i].diff === socketData.menu.bm.metadata.difficulty &&
+                            json.pool[mod][i].creator === socketData.menu.bm.metadata.mapper)
                     ) {
                         ret = `${mod}${i + 1}`;
                     }
@@ -219,7 +238,7 @@ function Overlay() {
         }
 
         return ret;
-    }, [mapId]);
+    }, [mapId, JSON.stringify(json)]);
 
     const particlesInit = useCallback(async (engine) => {
         await loadFull(engine);
@@ -227,11 +246,24 @@ function Overlay() {
 
     const particlesLoaded = useCallback(async (container) => {}, []);
 
+    const loadJsonData = async () => {
+        const res = await fetch("./config.json");
+        const data = await res.json();
+
+        if (JSON.stringify(data) !== JSON.stringify(json)) setJson(data);
+    };
+
     useEffect(() => {
         document.title = "Resurrection Cup Overlay";
+        loadJsonData();
+        const interval = setInterval(loadJsonData, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
 
-    return JSON.stringify(socketData) !== "{}" ? (
+    return JSON.stringify(socketData) !== "{}" && JSON.stringify(json) !== "{}" ? (
         <div id="App">
             <div id="overlay">
                 <div className="bg"></div>
@@ -241,16 +273,16 @@ function Overlay() {
                         <img src="./Logo.png" />
                     </div>
                     <div className="roundInfo">
-                        <div className="roundName">{jsonData.round}</div>
+                        <div className="roundName">{json.round}</div>
                         <div className="matchName">
-                            {jsonData.team.left} vs {jsonData.team.right}
+                            {json.team?.left} vs {json.team?.right}
                         </div>
                     </div>
                 </div>
                 <div className="bottomBar">
-                    <Team pos="left" socketData={socketData} />
-                    <Team pos="right" socketData={socketData} />
-                    <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} naviStatus={naviStatus} />
+                    <Team pos="left" socketData={socketData} jsonData={json} />
+                    <Team pos="right" socketData={socketData} jsonData={json} />
+                    <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} naviStatus={naviStatus} jsonData={json} />
                     <div className="scoreContainer">
                         <div
                             className={`score left ${

@@ -1,21 +1,22 @@
 import { useContext } from "react";
 
 import "./css/Player.css";
-import jsonData from "../../../../public/config.json"
+// import jsonData from "../../../../public/config.json"
 
 import { ControllerDataContext } from "../Mappool";
 
 const Team = (props) => {
+    const { json } = useContext(ControllerDataContext)
     return (
         <div className={`team ${props.pos}`}>
             <div
                 className="icon"
                 style={{
-                    backgroundImage: `url("./team/${jsonData.teamList.filter((t) => t.teamName === jsonData.team[props.pos]).shift().teamIconURL}")`,
+                    backgroundImage: `url("./team/${json.teamList.filter((t) => t.teamName === json.team[props.pos]).shift().teamIconURL}")`,
                 }}
             ></div>
             <div className="nameStar">
-                <div className="name">{jsonData.team[props.pos]}</div>
+                <div className="name">{json.team[props.pos]}</div>
                 <div className="starContainer">
                     {[...Array(props.socketData.tourney?.manager.bestOF ? Math.ceil(props.socketData.tourney.manager.bestOF / 2) : 0).keys()].map(
                         (idx) => {
