@@ -23,18 +23,22 @@ const Team = (props) => {
             ></div>
             <div className="nameStar">
                 <div className="name">{jsonData.team[props.pos]}</div>
-                <div className="starContainer">
-                    {[...Array(props.socketData.tourney?.manager.bestOF ? Math.ceil(props.socketData.tourney.manager.bestOF / 2) : 0).keys()].map(
-                        (idx) => {
-                            return (
-                                <div
-                                    className={`star ${idx < props.socketData.tourney.manager.stars[props.pos] ? "highlighted" : ""}`}
-                                    key={idx}
-                                ></div>
-                            );
-                        }
-                    )}
-                </div>
+                {props.socketData.tourney?.manager.bools.starsVisible ? (
+                    <div className="starContainer">
+                        {[...Array(props.socketData.tourney?.manager.bestOF ? Math.ceil(props.socketData.tourney.manager.bestOF / 2) : 0).keys()].map(
+                            (idx) => {
+                                return (
+                                    <div
+                                        className={`star ${idx < props.socketData.tourney.manager.stars[props.pos] ? "highlighted" : ""}`}
+                                        key={idx}
+                                    ></div>
+                                );
+                            }
+                        )}
+                    </div>
+                ) : (
+                    ""
+                )}
             </div>
         </div>
     );
@@ -123,6 +127,7 @@ function Overlay() {
                 data.menu.bm.id !== socketData.menu?.bm.id ||
                 data.menu.bm.stats.fullSR !== socketData.menu?.bm.stats.fullSR ||
                 data.tourney.manager.bestOF !== socketData.tourney?.manager.bestOF ||
+                data.tourney.manager.bools.starsVisible !== socketData.tourney?.manager.bools.starsVisible ||
                 JSON.stringify(data.tourney.manager.teamName) !== JSON.stringify(socketData.tourney.manager.teamName) ||
                 JSON.stringify(data.tourney.manager.stars) !== JSON.stringify(socketData.tourney.manager.stars) ||
                 JSON.stringify(data.tourney.manager.gameplay.score) !== JSON.stringify(socketData.tourney.manager.gameplay.score)
@@ -220,7 +225,7 @@ function Overlay() {
         await loadFull(engine);
     }, []);
 
-    const particlesLoaded = useCallback(async (container) => {}, [])
+    const particlesLoaded = useCallback(async (container) => {}, []);
 
     useEffect(() => {
         document.title = "Resurrection Cup Overlay";
