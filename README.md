@@ -22,6 +22,7 @@ Resurrection Cup Overlay + Showcase + Winner + Mappool
 ## Edit config (team icon, config.json)
 - Open `ResCupOverlay/config.json`
 - Edit the current round name
+- Edit `bestOf`, `nBans` (this one is for the Controller)
 - Edit the current match teams by the following json format:
 ```json
 {
