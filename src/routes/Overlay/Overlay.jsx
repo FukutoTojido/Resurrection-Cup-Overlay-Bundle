@@ -146,9 +146,13 @@ function Overlay() {
                     leftCountUp.reset();
                     rightCountUp.reset();
                 }
-                if (!data.tourney.manager.bools.scoreVisible && socketData.tourney?.manager.bools.scoreVisible && data.tourney.manager.bools.starsVisible) {
+                if (
+                    !data.tourney.manager.bools.scoreVisible &&
+                    socketData.tourney?.manager.bools.scoreVisible &&
+                    data.tourney.manager.bools.starsVisible
+                ) {
                     const winningSide =
-                    socketData.tourney.manager.gameplay.score.left > socketData.tourney.manager.gameplay.score.right
+                        socketData.tourney.manager.gameplay.score.left > socketData.tourney.manager.gameplay.score.right
                             ? "left"
                             : socketData.tourney.manager.gameplay.score.left < socketData.tourney.manager.gameplay.score.right
                             ? "right"
@@ -158,7 +162,7 @@ function Overlay() {
                         type: "setWinner",
                         data: {
                             winner: winningSide,
-                            map: modId
+                            map: modId,
                         },
                     });
                 }
@@ -221,7 +225,7 @@ function Overlay() {
 
         if (socketData.menu && json.pool) {
             for (const mod of Object.keys(json.pool)) {
-                for (let i = 0; i < json.pool?.[mod].length ? 0 : json.pool[mod].length; i++) {
+                for (let i = 0; i < json.pool[mod].length; i++) {
                     if (
                         json.pool[mod][i].id === mapId ||
                         (json.pool[mod][i].artist === socketData.menu.bm.metadata.artist &&

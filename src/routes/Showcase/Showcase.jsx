@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import useWebSocket from "react-use-websocket";
 
 import "./Showcase.css";
@@ -7,7 +7,7 @@ import "./Showcase.css";
 function Showcase() {
     const [socketData, setSocketData] = useState({});
     const [json, setJson] = useState({});
-    const [modId, setModId] = useState("");
+    const [mapId, setMapId] = useState(0);
 
     const ws = useWebSocket("ws://127.0.0.1:24050/ws", {
         onOpen: () => {
@@ -23,20 +23,8 @@ function Showcase() {
                 data.menu.bm.stats.fullSR !== socketData.menu.bm.stats.fullSR
             ) {
                 setSocketData(data);
-                setModId("??");
-                for (const mod of Object.keys(json.pool)) {
-                    json.pool[mod].forEach((map, idx) => {
-                        if (
-                            map.id === data.menu.bm.id ||
-                            (map.artist === data.menu.bm.metadata.artist &&
-                                map.title === data.menu.bm.metadata.title &&
-                                map.diff === data.menu.bm.metadata.difficulty &&
-                                map.creator === data.menu.bm.metadata.mapper)
-                        ) {
-                            setModId(`${mod}${idx + 1}`);
-                        }
-                    });
-                }
+
+                if (data.menu.bm.id !== socketData.menu?.bm.id) setMapId(data.menu.bm.id);
             }
         },
         shouldReconnect: (closeEvent) => true,
@@ -58,6 +46,27 @@ function Showcase() {
             clearInterval(interval);
         };
     }, []);
+
+    const modId = useMemo(() => {
+        let ret = "??";
+
+        if (socketData.menu && json.pool)
+            for (const mod of Object.keys(json.pool)) {
+                json.pool[mod].forEach((map, idx) => {
+                    if (
+                        map.id === socketData.menu.bm.id ||
+                        (map.artist === socketData.menu.bm.metadata.artist &&
+                            map.title === socketData.menu.bm.metadata.title &&
+                            map.diff === socketData.menu.bm.metadata.difficulty &&
+                            map.creator === socketData.menu.bm.metadata.mapper)
+                    ) {
+                        ret = `${mod}${idx + 1}`;
+                    }
+                });
+            }
+
+        return ret;
+    }, [mapId, JSON.stringify(json)]);
 
     return JSON.stringify(socketData) !== "{}" && socketData.menu && JSON.stringify(json) !== "{}" ? (
         <div id="App">
