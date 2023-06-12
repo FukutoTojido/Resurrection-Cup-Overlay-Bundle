@@ -55,7 +55,8 @@ function Showcase() {
                 data.gameplay.name !== socketData.gameplay?.name ||
                 data.menu.bm.stats.fullSR !== socketData.menu?.bm.stats.fullSR ||
                 data.menu.bm.path.folder !== socketData.menu?.bm.path.folder ||
-                data.menu.bm.path.file !== socketData.menu?.bm.path.file
+                data.menu.bm.path.file !== socketData.menu?.bm.path.file ||
+                data.menu.state !== socketData.menu?.state
             ) {
                 setSocketData(data);
 
@@ -147,7 +148,12 @@ function Showcase() {
     return JSON.stringify(socketData) !== "{}" && socketData.menu && JSON.stringify(json) !== "{}" ? (
         <div id="App">
             <div id="showcase">
-                <div id="stats">
+                <div
+                    id="stats"
+                    style={{
+                        transform: `translateX(${socketData.menu.state !== 2 ? "-1000px" : "0"})`,
+                    }}
+                >
                     <div
                         className="bg"
                         style={{
@@ -181,11 +187,21 @@ function Showcase() {
                         </div>
                     </div>
                 </div>
-                <div id="replayer">
+                <div
+                    id="replayer"
+                    style={{
+                        opacity: `${socketData.menu.state !== 2 ? "0" : "1"}`,
+                    }}
+                >
                     replay by
                     <div className="playerName">{socketData.gameplay.name}</div>
                 </div>
-                <div id="info">
+                <div
+                    id="info"
+                    style={{
+                        opacity: `${socketData.menu.state !== 2 ? "0" : "1"}`,
+                    }}
+                >
                     <div id="mod" className={modId.slice(0, 2)}>
                         {modId}
                     </div>
