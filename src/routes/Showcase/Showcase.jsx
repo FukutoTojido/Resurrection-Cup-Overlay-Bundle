@@ -1,13 +1,45 @@
 import { useState, useEffect, useMemo } from "react";
 import useWebSocket from "react-use-websocket";
 
+import osuPerformance from "../../../lib/osujs";
+
 import "./Showcase.css";
 // import jsonData from "../../../public/config.json";
+
+const modsParse = {
+    EZ: "EASY",
+    HT: "HALF_TIME",
+    NF: "NO_FAIL",
+    HR: "HARD_ROCK",
+    SD: "SUDDEN_DEATH",
+    PF: "PERFECT",
+    DT: "DOUBLE_TIME",
+    NC: "NIGHT_CORE",
+    HD: "HIDDEN",
+    FL: "FLASH_LIGHT",
+    AT: "AUTO_PLAY",
+    AP: "AUTO_PILOT",
+    RX: "RELAX",
+    SO: "SPUN_OUT",
+    V2: "SCORE_V2",
+    TB: "",
+    NM: "",
+    FM: "",
+    "??": "",
+};
 
 function Showcase() {
     const [socketData, setSocketData] = useState({});
     const [json, setJson] = useState({});
     const [mapId, setMapId] = useState(0);
+    const [mapStat, setMapStat] = useState({
+        CS: 0,
+        AR: 0,
+        OD: 0,
+        BPM: 0,
+        SR: 0,
+    });
+    const [mod, setMod] = useState("NM");
 
     const ws = useWebSocket("ws://127.0.0.1:24050/ws", {
         onOpen: () => {
@@ -25,6 +57,7 @@ function Showcase() {
                 setSocketData(data);
 
                 if (data.menu.bm.id !== socketData.menu?.bm.id) setMapId(data.menu.bm.id);
+                if (data.menu.mods.num !== socketData.menu?.mods.num) setMod(data.menu.mods.str);
             }
         },
         shouldReconnect: (closeEvent) => true,
@@ -47,10 +80,39 @@ function Showcase() {
         };
     }, []);
 
+    const getMapStat = async (mod) => {
+        const folderPath = encodeURIComponent(socketData.menu.bm.path.folder);
+        const osuFile = encodeURIComponent(socketData.menu.bm.path.file);
+        const res = await fetch(`http://127.0.0.1:24050/Songs/${folderPath}/${osuFile}`);
+        const rawData = await res.text();
+
+        const parsedMod = mod
+            .match(/.{1,2}/g)
+            .map((abbr) => modsParse[abbr])
+            .filter((m) => m !== "");
+        const builderOptions = {
+            addStacking: true,
+            mods: parsedMod,
+        };
+
+        const blueprintData = osuPerformance.parseBlueprint(rawData);
+        const beatmapData = osuPerformance.buildBeatmap(blueprintData, builderOptions);
+
+        const difficultyAttributes = osuPerformance.calculateDifficultyAttributes(beatmapData, true)[0];
+
+        setMapStat({
+            CS: beatmapData.difficulty.circleSize.toFixed(1),
+            AR: difficultyAttributes.approachRate.toFixed(1),
+            OD: difficultyAttributes.overallDifficulty.toFixed(1),
+            BPM: Math.round(difficultyAttributes.mostCommonBPM),
+            SR: difficultyAttributes.starRating.toFixed(2),
+        });
+    };
+
     const modId = useMemo(() => {
         let ret = "??";
 
-        if (socketData.menu && json.pool)
+        if (socketData.menu && json.pool) {
             for (const mod of Object.keys(json.pool)) {
                 json.pool[mod].forEach((map, idx) => {
                     if (
@@ -65,8 +127,11 @@ function Showcase() {
                 });
             }
 
+            getMapStat(mod);
+        }
+
         return ret;
-    }, [mapId, JSON.stringify(json)]);
+    }, [mapId, JSON.stringify(json), mod]);
 
     return JSON.stringify(socketData) !== "{}" && socketData.menu && JSON.stringify(json) !== "{}" ? (
         <div id="App">
@@ -84,29 +149,24 @@ function Showcase() {
                     ></div>
                     <div className="rawStats">
                         <div className="stat">
-                            CS <span>{socketData.menu.bm.stats.CS}</span>
+                            CS <span>{mapStat.CS}</span>
                         </div>
                         /
                         <div className="stat">
-                            AR <span>{socketData.menu.bm.stats.AR}</span>
+                            AR <span>{mapStat.AR}</span>
                         </div>
                         /
                         <div className="stat">
-                            OD <span>{socketData.menu.bm.stats.OD}</span>
+                            OD <span>{mapStat.OD}</span>
                         </div>
                         /
                         <div className="stat">
-                            BPM{" "}
-                            <span>
-                                {socketData.menu.bm.stats.BPM.max === socketData.menu.bm.stats.BPM.min
-                                    ? socketData.menu.bm.stats.BPM.min
-                                    : `${socketData.menu.bm.stats.BPM.min} - ${socketData.menu.bm.stats.BPM.max}`}
-                            </span>
+                            BPM <span>{mapStat.BPM}</span>
                         </div>
                     </div>
                     <div className="starRating">
                         <div className="stat">
-                            Star Rating <span>{socketData.menu.bm.stats.fullSR}★</span>
+                            Star Rating <span>{mapStat.SR}★</span>
                         </div>
                     </div>
                 </div>

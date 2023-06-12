@@ -12,6 +12,11 @@
         overflow: hidden;
 
         box-shadow: 0 4px 10px 0 rgb(0 0 0 /0.5);
+
+        display: flex;
+        flex-direction: column;
+
+        line-height: 30px;
     }
 
     .bg {
@@ -40,6 +45,8 @@
         position: relative;
         display: flex;
         gap: 10px;
+
+        font-size: 20px;
     }
 
     .stat span {
