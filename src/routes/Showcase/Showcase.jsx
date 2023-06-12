@@ -40,6 +40,7 @@ function Showcase() {
         SR: 0,
     });
     const [mod, setMod] = useState("NM");
+    const [filePath, setFilePath] = useState("");
 
     const ws = useWebSocket("ws://127.0.0.1:24050/ws", {
         onOpen: () => {
@@ -52,12 +53,19 @@ function Showcase() {
                 data.menu.bm.id !== socketData.menu?.bm.id ||
                 data.menu.mods.num !== socketData.menu?.mods.num ||
                 data.gameplay.name !== socketData.gameplay?.name ||
-                data.menu.bm.stats.fullSR !== socketData.menu.bm.stats.fullSR
+                data.menu.bm.stats.fullSR !== socketData.menu?.bm.stats.fullSR ||
+                data.menu.bm.path.folder !== socketData.menu?.bm.path.folder ||
+                data.menu.bm.path.file !== socketData.menu?.bm.path.file
             ) {
                 setSocketData(data);
 
                 if (data.menu.bm.id !== socketData.menu?.bm.id) setMapId(data.menu.bm.id);
                 if (data.menu.mods.num !== socketData.menu?.mods.num) setMod(data.menu.mods.str);
+                if (data.menu.bm.path.folder !== socketData.menu?.bm.path.folder || data.menu.bm.path.file !== socketData.menu?.bm.path.file) {
+                    const folderPath = encodeURIComponent(data.menu.bm.path.folder);
+                    const osuFile = encodeURIComponent(data.menu.bm.path.file);
+                    setFilePath(`http://127.0.0.1:24050/Songs/${folderPath}/${osuFile}`);
+                }
             }
         },
         shouldReconnect: (closeEvent) => true,
@@ -81,9 +89,7 @@ function Showcase() {
     }, []);
 
     const getMapStat = async (mod) => {
-        const folderPath = encodeURIComponent(socketData.menu.bm.path.folder);
-        const osuFile = encodeURIComponent(socketData.menu.bm.path.file);
-        const res = await fetch(`http://127.0.0.1:24050/Songs/${folderPath}/${osuFile}`);
+        const res = await fetch(filePath);
         const rawData = await res.text();
 
         const parsedMod = mod
@@ -99,6 +105,7 @@ function Showcase() {
         const beatmapData = osuPerformance.buildBeatmap(blueprintData, builderOptions);
 
         const difficultyAttributes = osuPerformance.calculateDifficultyAttributes(beatmapData, true)[0];
+        // console.log(difficultyAttributes);
 
         if (difficultyAttributes)
             setMapStat({
@@ -107,14 +114,6 @@ function Showcase() {
                 OD: difficultyAttributes.overallDifficulty.toFixed(1),
                 BPM: Math.round(difficultyAttributes.mostCommonBPM),
                 SR: difficultyAttributes.starRating.toFixed(2),
-            });
-        else
-            setMapStat({
-                CS: socketData.menu.bm.stats.CS,
-                AR: socketData.menu.bm.stats.AR,
-                OD: socketData.menu.bm.stats.OD,
-                BPM: `${socketData.menu.bm.stats.BPM.min} - ${socketData.menu.bm.stats.BPM.max}`,
-                SR: socketData.menu.bm.stats.fullSR,
             });
     };
 
@@ -135,12 +134,15 @@ function Showcase() {
                     }
                 });
             }
-
-            getMapStat(mod);
         }
 
         return ret;
-    }, [mapId, JSON.stringify(json), mod]);
+    }, [mapId, JSON.stringify(json)]);
+
+    useEffect(() => {
+        // console.log("a");
+        if (socketData.menu) getMapStat(mod);
+    }, [filePath]);
 
     return JSON.stringify(socketData) !== "{}" && socketData.menu && JSON.stringify(json) !== "{}" ? (
         <div id="App">
