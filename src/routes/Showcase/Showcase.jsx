@@ -100,13 +100,22 @@ function Showcase() {
 
         const difficultyAttributes = osuPerformance.calculateDifficultyAttributes(beatmapData, true)[0];
 
-        setMapStat({
-            CS: beatmapData.difficulty.circleSize.toFixed(1),
-            AR: difficultyAttributes.approachRate.toFixed(1),
-            OD: difficultyAttributes.overallDifficulty.toFixed(1),
-            BPM: Math.round(difficultyAttributes.mostCommonBPM),
-            SR: difficultyAttributes.starRating.toFixed(2),
-        });
+        if (difficultyAttributes)
+            setMapStat({
+                CS: beatmapData.difficulty.circleSize.toFixed(1),
+                AR: difficultyAttributes.approachRate.toFixed(1),
+                OD: difficultyAttributes.overallDifficulty.toFixed(1),
+                BPM: Math.round(difficultyAttributes.mostCommonBPM),
+                SR: difficultyAttributes.starRating.toFixed(2),
+            });
+        else
+            setMapStat({
+                CS: socketData.menu.bm.stats.CS,
+                AR: socketData.menu.bm.stats.AR,
+                OD: socketData.menu.bm.stats.OD,
+                BPM: `${socketData.menu.bm.stats.BPM.min} - ${socketData.menu.bm.stats.BPM.max}`,
+                SR: socketData.menu.bm.stats.fullSR,
+            });
     };
 
     const modId = useMemo(() => {
