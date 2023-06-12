@@ -143,7 +143,7 @@ function Showcase() {
     useEffect(() => {
         // console.log("a");
         if (socketData.menu) getMapStat(mod);
-    }, [filePath]);
+    }, [filePath, mod]);
 
     return JSON.stringify(socketData) !== "{}" && socketData.menu && JSON.stringify(json) !== "{}" ? (
         <div id="App">
