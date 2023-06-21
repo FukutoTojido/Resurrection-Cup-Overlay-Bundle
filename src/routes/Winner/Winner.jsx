@@ -88,13 +88,19 @@ const Winner = () => {
                             ? winnerTeam?.playerList.playerName.map((name, idx) => {
                                   return (
                                       <div className="player" key={idx}>
-                                          <div
-                                              className="playerIcon"
-                                              style={{
-                                                  backgroundImage: `url(https://a.ppy.sh/${winnerTeam.playerList.playerID[idx]})`,
-                                              }}
-                                          ></div>
-                                          <div className="playerName">{name}</div>
+                                          {name !== "" ? (
+                                              <>
+                                                  <div
+                                                      className="playerIcon"
+                                                      style={{
+                                                          backgroundImage: `url(https://a.ppy.sh/${winnerTeam.playerList.playerID[idx]})`,
+                                                      }}
+                                                  ></div>
+                                                  <div className="playerName">{name}</div>
+                                              </>
+                                          ) : (
+                                              ""
+                                          )}
                                       </div>
                                   );
                               })

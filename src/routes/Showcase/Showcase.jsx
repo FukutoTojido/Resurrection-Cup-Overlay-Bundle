@@ -53,6 +53,7 @@ function Showcase() {
                 data.menu.bm.id !== socketData.menu?.bm.id ||
                 data.menu.mods.num !== socketData.menu?.mods.num ||
                 data.gameplay.name !== socketData.gameplay?.name ||
+                data.menu.bm.time.full !== socketData.menu?.bm.time.full ||
                 data.menu.bm.stats.fullSR !== socketData.menu?.bm.stats.fullSR ||
                 data.menu.bm.path.folder !== socketData.menu?.bm.path.folder ||
                 data.menu.bm.path.file !== socketData.menu?.bm.path.file ||
@@ -106,7 +107,15 @@ function Showcase() {
         const beatmapData = osuPerformance.buildBeatmap(blueprintData, builderOptions);
 
         const difficultyAttributes = osuPerformance.calculateDifficultyAttributes(beatmapData, true)[0];
-        // console.log(difficultyAttributes);
+        // console.log(beatmapData);
+
+        const lastObj = beatmapData.hitObjects.at(-1);
+        const firstObj = beatmapData.hitObjects.at(0);
+
+        const endTime = !lastObj.startTime ? lastObj.hitTime : lastObj.startTime;
+        const startTime = !firstObj.startTime ? firstObj.hitTime : firstObj.startTime;
+
+        const fullTime = msToTime((endTime - startTime) * beatmapData.gameClockRate);
 
         if (difficultyAttributes)
             setMapStat({
@@ -115,7 +124,15 @@ function Showcase() {
                 OD: difficultyAttributes.overallDifficulty.toFixed(1),
                 BPM: Math.round(difficultyAttributes.mostCommonBPM),
                 SR: difficultyAttributes.starRating.toFixed(2),
+                Length: fullTime,
             });
+    };
+
+    const msToTime = (ms) => {
+        const s = `${Math.floor(ms / 1000) % 60}`.padStart(2, "0");
+        const m = Math.floor(ms / 1000 / 60);
+
+        return `${m}:${s}`;
     };
 
     const modId = useMemo(() => {
@@ -179,6 +196,10 @@ function Showcase() {
                         /
                         <div className="stat">
                             BPM <span>{mapStat.BPM}</span>
+                        </div>
+                        /
+                        <div className="stat">
+                            Length <span>{mapStat.Length}</span>
                         </div>
                     </div>
                     <div className="starRating">
