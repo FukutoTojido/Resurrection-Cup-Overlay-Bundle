@@ -32,6 +32,12 @@ function Showcase() {
     const [socketData, setSocketData] = useState({});
     const [json, setJson] = useState({});
     const [mapId, setMapId] = useState(0);
+    const [mapData, setMapData] = useState({
+        artist: "",
+        title: "",
+        creator: "",
+        difficulty: "",
+    });
     const [mapStat, setMapStat] = useState({
         CS: 0,
         AR: 0,
@@ -60,8 +66,16 @@ function Showcase() {
                 data.menu.state !== socketData.menu?.state
             ) {
                 setSocketData(data);
+                setMapData({
+                    artist: data.menu.bm.metadata.artist,
+                    title: data.menu.bm.metadata.title,
+                    creator: data.menu.bm.metadata.mapper,
+                    difficulty: data.menu.bm.metadata.difficulty,
+                });
 
-                if (data.menu.bm.id !== socketData.menu?.bm.id) setMapId(data.menu.bm.id);
+                if (data.menu.bm.id !== socketData.menu?.bm.id) {
+                    setMapId(data.menu.bm.id);
+                }
                 if (data.menu.mods.num !== socketData.menu?.mods.num) setMod(data.menu.mods.str);
                 if (data.menu.bm.path.folder !== socketData.menu?.bm.path.folder || data.menu.bm.path.file !== socketData.menu?.bm.path.file) {
                     const folderPath = encodeURIComponent(data.menu.bm.path.folder);
@@ -155,7 +169,7 @@ function Showcase() {
         }
 
         return ret;
-    }, [mapId, JSON.stringify(json)]);
+    }, [mapId, JSON.stringify(json), JSON.stringify(mapData)]);
 
     useEffect(() => {
         // console.log("a");
@@ -168,7 +182,7 @@ function Showcase() {
                 <div
                     id="stats"
                     style={{
-                        transform: `translateX(${socketData.menu.state !== 2 ? "-1000px" : "0"})`,
+                        transform: `translateX(${false && socketData.menu.state !== 2 ? "-1000px" : "0"})`,
                     }}
                 >
                     <div
@@ -220,7 +234,7 @@ function Showcase() {
                 <div
                     id="info"
                     style={{
-                        opacity: `${socketData.menu.state !== 2 ? "0" : "1"}`,
+                        opacity: `${false && socketData.menu.state !== 2 ? "0" : "1"}`,
                     }}
                 >
                     <div id="mod" className={modId.slice(0, 2)}>

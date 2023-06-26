@@ -3,14 +3,14 @@
     "nBans": 1,
     "round": "Round of 32",
     "team": {
-        "left": "napadeniesomov",
-        "right": "GENTE SERIA USH"
+        "left": "ghoul mode",
+        "right": "Allah Gaming"
     },
     "teamList": [
         {
             "teamName": "fresh off the boat",
             "teamSeeding": 1,
-            "teamIconURL": "1.png",
+            "teamIconURL": "1.gif",
             "playerList": {
                 "playerName": [
                     "Rektygon",
@@ -91,7 +91,7 @@
         {
             "teamName": "quitw",
             "teamSeeding": 4,
-            "teamIconURL": "4.png",
+            "teamIconURL": "4.jpg",
             "playerList": {
                 "playerName": [
                     "-Koda",
@@ -145,7 +145,7 @@
         {
             "teamName": "No title",
             "teamSeeding": 6,
-            "teamIconURL": "6.png",
+            "teamIconURL": "6.jpg",
             "playerList": {
                 "playerName": [
                     "Atipir",
@@ -172,7 +172,7 @@
         {
             "teamName": "halcyon",
             "teamSeeding": 7,
-            "teamIconURL": "7.png",
+            "teamIconURL": "7.gif",
             "playerList": {
                 "playerName": [
                     "rudj",
@@ -253,7 +253,7 @@
         {
             "teamName": "Gentlemen fgsfds",
             "teamSeeding": 10,
-            "teamIconURL": "10.png",
+            "teamIconURL": "10.jpg",
             "playerList": {
                 "playerName": [
                     "resoa",
@@ -334,7 +334,7 @@
         {
             "teamName": "Capybara",
             "teamSeeding": 13,
-            "teamIconURL": "13.png",
+            "teamIconURL": "13.jpg",
             "playerList": {
                 "playerName": [
                     "Paracat",
@@ -442,7 +442,7 @@
         {
             "teamName": "fishballcat",
             "teamSeeding": 17,
-            "teamIconURL": "17.png",
+            "teamIconURL": "17.jpg",
             "playerList": {
                 "playerName": [
                     "Exxotl",
@@ -631,7 +631,7 @@
         {
             "teamName": "waga na wa megumin",
             "teamSeeding": 24,
-            "teamIconURL": "24.png",
+            "teamIconURL": "24.jpg",
             "playerList": {
                 "playerName": [
                     "rushia fangirl",
@@ -684,7 +684,7 @@
         {
             "teamName": "POSKVONYALbl",
             "teamSeeding": 26,
-            "teamIconURL": "26.png",
+            "teamIconURL": "26.jpg",
             "playerList": {
                 "playerName": [
                     "Melifaro",
@@ -738,7 +738,7 @@
         {
             "teamName": "xX_gLOryHAMmerXx_9348",
             "teamSeeding": 28,
-            "teamIconURL": "28.png",
+            "teamIconURL": "28.jpg",
             "playerList": {
                 "playerName": [
                     "XenoitesBadPog",
@@ -763,7 +763,7 @@
         {
             "teamName": "piwo",
             "teamSeeding": 29,
-            "teamIconURL": "29.png",
+            "teamIconURL": "29.jpg",
             "playerList": {
                 "playerName": [
                     "Unavel",
@@ -817,7 +817,7 @@
         {
             "teamName": "napadeniesomov",
             "teamSeeding": 31,
-            "teamIconURL": "31.png",
+            "teamIconURL": "31.jpg",
             "playerList": {
                 "playerName": [
                     "mindblock",
@@ -896,22 +896,22 @@
                 "id": 3280820
             },
             {
-                "artist": "Feryquitous",
-                "title": "Hemizorv",
-                "creator": "Realazy",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1301388/covers/cover.jpg",
-                "diff": "Dissonance",
-                "id": 2699240
+                "artist": "aran",
+                "title": "Xperanza",
+                "creator": "LeCandy",
+                "coverURL": "",
+                "diff": "Tourney Ver.",
+                "id": -1
             }
         ],
         "HD": [
             {
-                "artist": "isekaijoucho feat. SEKAI",
-                "title": "Tokoshizume",
-                "creator": "Rtyzen",
-                "coverURL": "https://assets.ppy.sh/beatmaps/2012103/covers/cover.jpg",
-                "diff": "Demolish",
-                "id": 4186924
+                "artist": "Shiena Nishizawa",
+                "title": "Meaning",
+                "creator": "nyarvis",
+                "coverURL": "",
+                "diff": "bakabaka new",
+                "id": -1
             },
             {
                 "artist": "Sakakibara Yui",
@@ -932,12 +932,12 @@
                 "id": 3747547
             },
             {
-                "artist": "onoken feat. Misaki",
-                "title": "Gokuaku no Hana",
-                "creator": "milr_",
-                "coverURL": "https://assets.ppy.sh/beatmaps/1941899/covers/cover.jpg",
-                "diff": "Expert",
-                "id": 4016778
+                "artist": "Okabe Keiichi (MONACA)",
+                "title": "Kikyou",
+                "creator": "lewski",
+                "coverURL": "",
+                "diff": "Mankai",
+                "id": -1
             }
         ],
         "DT": [
@@ -968,20 +968,20 @@
         ],
         "FM": [
             {
-                "artist": "Camellia",
-                "title": "Azure Vixen",
-                "creator": "Livia",
-                "coverURL": "https://assets.ppy.sh/beatmaps/2011971/covers/cover.jpg",
-                "diff": "ALL JUSTICE",
-                "id": 4186637
+                "artist": "Kyi (CV:Mayu Mineda)",
+                "title": "Miss Conductor",
+                "creator": "Lokidoki",
+                "coverURL": "",
+                "diff": "Propaganda (ReCup ver.)",
+                "id": -1
             },
             {
-                "artist": "Sorry about my face",
-                "title": "L4D",
-                "creator": "fergas",
-                "coverURL": "https://assets.ppy.sh/beatmaps/2012020/covers/cover.jpg",
-                "diff": "Dance",
-                "id": 4186745
+                "artist": "Zekk",
+                "title": "Sugary Daydream",
+                "creator": "kowari",
+                "coverURL": "",
+                "diff": "Illusion",
+                "id": -1
             },
             {
                 "artist": "Ayane",
