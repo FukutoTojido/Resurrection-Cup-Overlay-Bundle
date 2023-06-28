@@ -54,9 +54,12 @@
 
 body {
     margin: 0;
+    padding: 0;
+
+    overflow: hidden;
 }
 
-* {
+#App * {
     box-sizing: border-box;
 }
 
