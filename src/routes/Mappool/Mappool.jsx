@@ -20,11 +20,17 @@ function Mappool() {
     const [json, setJson] = useState({});
     const [isWsInit, setIsWsInit] = useState(false);
     const [connectStatus, setConnectStatus] = useState(false);
+    const [roundStatus, setRoundStatus] = useState({
+        left: -1,
+        right: -1,
+        name: "",
+    });
 
     const wsController = useWebSocket(WS_URL, {
         onOpen: () => {
             console.log("Controller WebSocket connected");
             setConnectStatus(true);
+            askForInitialData();
         },
         onMessage: (event) => {
             console.log(JSON.parse(event.data));
@@ -48,6 +54,9 @@ function Mappool() {
                     const tempNavi = { ...controllerData };
                     tempNavi.status.naviStatus = mes.data;
                     setControllerData(tempNavi);
+                    break;
+                case "setInitialData":
+                    setRoundStatus(mes.data);
                     break;
             }
         },
@@ -75,6 +84,10 @@ function Mappool() {
             }
         },
     });
+
+    const askForInitialData = () => {
+        wsController.sendJsonMessage({ type: "fetchInitRoundData" }, false);
+    };
 
     const particlesInit = useCallback(async (engine) => {
         await loadFull(engine);
@@ -115,7 +128,8 @@ function Mappool() {
                             value={{
                                 controllerData,
                                 socketData,
-                                json
+                                json,
+                                roundStatus
                             }}
                         >
                             <Player />

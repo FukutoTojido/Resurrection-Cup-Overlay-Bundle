@@ -126,11 +126,11 @@ const Separator = () => {
 
 const TieBreakRow = () => {
     const { controllerData } = useContext(ControllerDataContext);
-    const [rowData, setRowData] = useState(controllerData.status.poolStatus.tb.pick[0]);
+    const [rowData, setRowData] = useState(controllerData.status.poolStatus.tb?.pick[0] ?? {});
 
     useEffect(() => {
-        setRowData(controllerData.status.poolStatus.tb.pick[0]);
-    }, [JSON.stringify(controllerData.status.poolStatus.tb.pick[0])]);
+        setRowData(controllerData.status.poolStatus.tb?.pick[0] ?? {});
+    }, [JSON.stringify(controllerData.status.poolStatus.tb?.pick[0])]);
 
     return (
         <div className="row tb">

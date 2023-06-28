@@ -18,13 +18,11 @@ const Team = (props) => {
             <div
                 className="icon"
                 style={{
-                    backgroundImage: `url("./team/${
-                        props.jsonData.teamList?.filter((t) => t.teamName === props.jsonData.team?.[props.pos]).shift().teamIconURL
-                    }")`,
+                    backgroundImage: `url("./team/${props.idx < 0 ? "" : props.jsonData.teamList[props.idx].teamIconURL}")`,
                 }}
             ></div>
             <div className="nameStar">
-                <div className="name">{props.jsonData.team?.[props.pos]}</div>
+                <div className="name">{props.idx < 0 ? "" : props.jsonData.teamList[props.idx]?.teamName}</div>
                 {props.socketData.tourney?.manager.bools.starsVisible ? (
                     <div className="starContainer">
                         {[...Array(props.socketData.tourney?.manager.bestOF ? Math.ceil(props.socketData.tourney.manager.bestOF / 2) : 0).keys()].map(
@@ -78,6 +76,12 @@ function Overlay() {
     const [endLeft, setEndLeft] = useState(0);
     const [startRight, setStartRight] = useState(0);
     const [endRight, setEndRight] = useState(0);
+
+    const [roundStatus, setRoundStatus] = useState({
+        left: -1,
+        right: -1,
+        name: "",
+    });
 
     // const [config, setConfig] = useState({
     //     round: "",
@@ -165,6 +169,10 @@ function Overlay() {
                             map: modId,
                         },
                     });
+
+                    wsController.sendJsonMessage({
+                        type: "nextPick",
+                    });
                 }
                 setSocketData(data);
             }
@@ -178,6 +186,7 @@ function Overlay() {
     const wsController = useWebSocket("ws://localhost:3727/ws", {
         onOpen: () => {
             console.log("Controller WebSocket Connected");
+            askForInitialData();
         },
         onMessage: (event) => {
             if (event.data[0] !== "{") return;
@@ -187,9 +196,16 @@ function Overlay() {
                 case "setNaviStatus":
                     setNaviStatus(mes.data);
                     break;
+                case "setInitialData":
+                    setRoundStatus(mes.data);
+                    break;
             }
         },
     });
+
+    const askForInitialData = () => {
+        wsController.sendJsonMessage({ type: "fetchInitRoundData" }, false);
+    };
 
     const getMapStat = async (mod) => {
         const folderPath = encodeURIComponent(socketData.menu.bm.path.folder);
@@ -277,15 +293,16 @@ function Overlay() {
                         <img src="./Logo.png" />
                     </div>
                     <div className="roundInfo">
-                        <div className="roundName">{json.round}</div>
+                        <div className="roundName">{roundStatus.name}</div>
                         <div className="matchName">
-                            {json.team?.left} vs {json.team?.right}
+                            {roundStatus.left < 0 ? "" : json.teamList[roundStatus.left].teamName} vs{" "}
+                            {roundStatus.right < 0 ? "" : json.teamList[roundStatus.right].teamName}
                         </div>
                     </div>
                 </div>
                 <div className="bottomBar">
-                    <Team pos="left" socketData={socketData} jsonData={json} />
-                    <Team pos="right" socketData={socketData} jsonData={json} />
+                    <Team pos="left" socketData={socketData} jsonData={json} idx={roundStatus.left} />
+                    <Team pos="right" socketData={socketData} jsonData={json} idx={roundStatus.right} />
                     <NowPlaying socketData={socketData} modId={modId} mapStat={mapStat} naviStatus={naviStatus} jsonData={json} />
                     <div className="scoreContainer">
                         <div

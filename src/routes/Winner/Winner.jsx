@@ -12,6 +12,11 @@ const Winner = () => {
     const [socketData, setSocketData] = useState({});
     const [json, setJson] = useState({});
     const [winnerTeam, setWinnerTeam] = useState(null);
+    const [roundStatus, setRoundStatus] = useState({
+        left: -1,
+        right: -1,
+        name: "",
+    });
 
     const ws = useWebSocket("ws://127.0.0.1:24050/ws", {
         onOpen: () => {
@@ -22,15 +27,37 @@ const Winner = () => {
 
             if (JSON.stringify(data.tourney.manager.stars) !== JSON.stringify(socketData.tourney?.manager.stars)) {
                 if (data.tourney.manager.stars.left == Math.ceil((data.tourney.manager.bestOF + 1) / 2))
-                    setWinnerTeam(json.teamList?.filter((t) => t.teamName === json.team?.left).shift());
+                    setWinnerTeam(roundStatus.left < 0 ? null : json.teamList[roundStatus.left]);
                 else if (data.tourney.manager.stars.right == Math.ceil((data.tourney.manager.bestOF + 1) / 2))
-                    setWinnerTeam(json.teamList?.filter((t) => t.teamName === json.team?.right).shift());
+                    setWinnerTeam(roundStatus.right < 0 ? null : json.teamList[roundStatus.right]);
                 else setWinnerTeam(null);
 
                 setSocketData(data);
             }
         },
     });
+
+    const wsController = useWebSocket("ws://localhost:3727/ws", {
+        onOpen: () => {
+            console.log("Controller Connected");
+            askForInitialData();
+        },
+        onMessage: (event) => {
+            if (event.data[0] !== "{") return;
+            const mes = JSON.parse(event.data);
+
+            switch (mes.type) {
+                case "setInitialData":
+                    setRoundStatus(mes.data);
+                    break;
+            }
+        },
+        shouldReconnect: (closeEvent) => true,
+    });
+
+    const askForInitialData = () => {
+        wsController.sendJsonMessage({ type: "fetchInitRoundData" }, false);
+    };
 
     const particlesInit = useCallback(async (engine) => {
         await loadFull(engine);
@@ -69,7 +96,7 @@ const Winner = () => {
                             }}
                         ></div>
                         <div className="teamNameContainer">
-                            <div className="round">Resurrection Cup - {json.round}</div>
+                            <div className="round">Resurrection Cup - {roundStatus.name}</div>
                             <div
                                 className={`teamName ${
                                     winnerTeam?.teamName === json.team?.left ? "left" : winnerTeam?.teamName === json.team?.right ? "right" : ""

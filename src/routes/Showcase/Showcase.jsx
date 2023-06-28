@@ -182,7 +182,7 @@ function Showcase() {
                 <div
                     id="stats"
                     style={{
-                        transform: `translateX(${false && socketData.menu.state !== 2 ? "-1000px" : "0"})`,
+                        transform: `translateX(${socketData.menu.state !== 2 ? "-1000px" : "0"})`,
                     }}
                 >
                     <div
@@ -234,7 +234,7 @@ function Showcase() {
                 <div
                     id="info"
                     style={{
-                        opacity: `${false && socketData.menu.state !== 2 ? "0" : "1"}`,
+                        opacity: `${socketData.menu.state !== 2 ? "0" : "1"}`,
                     }}
                 >
                     <div id="mod" className={modId.slice(0, 2)}>
